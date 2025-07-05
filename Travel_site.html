@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Explorer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center flex-wrap">
+      <div class="text-2xl font-bold">Travel Explorer</div>
+      <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div id="menu" class="w-full md:flex md:items-center md:w-auto hidden">
+        <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 mt-4 md:mt-0">
+          <li><a href="#" class="flex items-center gap-1 hover:text-yellow-300"><i class="fa-solid fa-home"></i> Home</a>
+          </li>
+          <li><a href="#" class="flex items-center gap-1 hover:text-yellow-300"><i class="fa-solid fa-map-marked-alt"></i>
+              Places</a></li>
+          <li><a href="#" class="flex items-center gap-1 hover:text-yellow-300"><i class="fa-solid fa-images"></i>
+              Gallery</a></li>
+          <li><a href="#" class="flex items-center gap-1 hover:text-yellow-300"><i class="fa-solid fa-envelope"></i>
+              Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-cover bg-center h-[80vh] md:h-screen text-white flex items-center justify-center"
+    style="background-image: url('https://source.unsplash.com/1600x900/?travel,nature');">
+    <div class="text-center bg-black bg-opacity-60 p-10 rounded w-11/12 md:w-2/3">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">Discover New Destinations</h1>
+      <p class="text-lg md:text-xl mb-6">Your next adventure starts here</p>
+      <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded">Explore Now</button>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Promotional Video</h2>
+    <iframe class="w-full rounded shadow" height="315" src="https://www.youtube.com/embed/Y2IGypd2FA0" frameborder="0"
+      allowfullscreen></iframe>
+  </section>
+
+  <!-- Audio Section -->
+  <section class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Background Music</h2>
+    <audio controls class="w-full">
+      <source src="bg.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </section>
+
+  <!-- Fetch API Section -->
+  <section class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Popular Blogs</h2>
+    <div id="apiContent" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+  </section>
+
+  <!-- Footer with SVG Graphic -->
+  <footer class="bg-gray-800 text-white p-6 mt-10 text-center">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      <p>&copy; 2025 Travel Explorer</p>
+    </div>
+  </footer>
+  <!-- JavaScript for Interactivity -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Hamburger toggle
+      document.getElementById("menu-btn").addEventListener("click", () => {
+        document.getElementById("menu").classList.toggle("hidden");
+      });
+
+      // Fetch API Example
+      fetch('https://jsonplaceholder.typicode.com/posts?_limit=3')
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById('apiContent');
+          data.forEach(post => {
+            const div = document.createElement('div');
+            div.className = 'bg-white p-4 rounded shadow';
+            div.innerHTML = `<h3 class='text-lg font-bold'>${post.title}</h3><p>${post.body}</p>`;
+            container.appendChild(div);
+          });
+        });
+    });
+  </script>
+</body>
+
+</html>
